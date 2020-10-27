@@ -1,11 +1,14 @@
 #container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-    grid-auto-rows: 1fr;
+
+    width:700px;
+    height:700px;
+
+
 }
 span {
-    height: 100px;
+    height: 1px;
     width:100px;
     background:green;
-    margin:5px;
+    margin:0;
 }
