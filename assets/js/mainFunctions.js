@@ -1,3 +1,105 @@
+
+let _numOfPieces = 399;
+let piecesImg = [];
+
+// div
+
+let _injectDiv = 'wrapper';
+
+// create elements based on information in paramaters and append them to the "wrapper"/"container" div
+function createElemWithAttr(appendTo, elem, attr, value) {
+    if(appendTo != null) {
+        if(elem && attr && value) {
+            let origin = document.getElementById(appendTo);
+            let element = document.createElement(elem);
+            element.setAttribute(attr, value);
+            origin.append(element);
+        } else {
+            return console.log('missing parameters');
+        }
+    } return;
+}
+
+function randomizeArray(arr) {
+    let array = arr;
+    array.sort(() => Math.random() - 0.5);
+    return array;
+}
+
+function generategrid() {
+
+    createElemWithAttr(_injectDiv, 'div', 'id', "inner-left");
+
+    createElemWithAttr(_injectDiv, 'div', 'id', "inner-right");
+
+    createElemWithAttr("inner-left", 'div', 'id', "puzzle-left");
+
+    createElemWithAttr("inner-right", 'div', 'id', "puzzle-right");
+
+}
+generategrid();
+
+function generatePuzzlePieces() {
+    // declaring variables
+    let i;
+
+    let _leftSide = document.getElementById('puzzle-left');
+    let _rightSide = document.getElementById('puzzle-right');
+
+    // push img elements with appropriate name to array.
+    for (i = 0; i <= _numOfPieces; i++){
+        piecesImg.push('<img class="puzzleBox" id="b' + [i] + '" ondragstart="drag(event)" draggable="true" src="assets/images/puzzleparts/img (' + [i] + ').png">');
+    }
+
+
+    // make the grid that you place the puzzle pieces(img elements) into to make a completed puzzle
+    for(i = 0; i <= _numOfPieces; i++) {
+        _leftSide.innerHTML += '<span id="g' + [i] + '"  ondrop="drop(event)" ondragover="allowDrop(event)"></span>';
+    }
+    
+    // randomize the array with img elements and add img elements to "container-right"
+    list = randomizeArray(piecesImg);
+    for (i = 0; i <= _numOfPieces; i++) {
+        _rightSide.innerHTML += piecesImg[i];
+    }
+}
+
+//Drag + drop secion
+function allowDrop(ev) {
+    ev.preventDefault(); 
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
+// load functions
+window.onload = function() {
+
+    generatePuzzlePieces();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // generate divs that are going to contain the finished puzzle
 // function genPuzzleCanvas() {
     
@@ -29,80 +131,3 @@
 //         console.log(_puzzleSqWidth)
 //     });
 //
-
-function generategrid() {
-
-    let wrapper = document.createElement('div');
-    wrapper.setAttribute("id", "wrapper");
-    document.body.appendChild(wrapper);
-    
-    var innerLeft = document.createElement('div');
-    innerLeft.setAttribute('id', 'inner-left');
-    
-    var innerRight = document.createElement('div');
-    innerRight.setAttribute('id', 'inner-right');
-    
-    let _puzzleGrid = document.createElement('div');
-    _puzzleGrid.setAttribute('id', 'container-left');
-    
-
-    let _puzzlePieces = document.createElement('div');
-    _puzzlePieces.setAttribute("id", "container-right")
-
-    
-    wrapper.append(innerLeft);
-
-    wrapper.append(innerRight);
-
-    innerLeft.append(_puzzleGrid);
-    innerRight.append(_puzzlePieces);
-
-}
-
-function generatePuzzlePieces() {
-    // declaring variables
-
-    let _numOfPieces = 401;
-    let i;
-    let piecesImg = [];
-
-
-    // push img elements with appropriate name to array.
-    for (i = 1; i < _numOfPieces; i++){
-        piecesImg.push('<img class="puzzleBox" draggable="true" src="assets/images/puzzleparts/img (' + [i] + ').png">');
-    }
-
-    // randomize the array order
-    list = piecesImg.sort(() => Math.random() - 0.5);
-
-    // add randomized puzzle pieces to container right
-    for (i = 0; i < 400; i++){
-        document.getElementById('container-right').innerHTML += list[i];
-    }
-
-    // make grid for placing pieces into a completed puzzle
-    for(i = 0; i < 400; i++) {
-        document.getElementById('container-left').innerHTML += '<span>' + [i] + '</span>';
-    }
-}
-
-addEventListener("")
-function allowDrop(ev) {
-    ev.preventDefault();
-  }
-  
-  function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-  }
-  
-  function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-  }
-
-// load functions
-window.onload = function() {
-    generategrid();
-    generatePuzzlePieces();
-}
