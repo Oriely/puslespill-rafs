@@ -14,6 +14,7 @@ body {
     grid-template-columns: 1fr 1fr;
     min-width:100%;
     height:100vh;
+    background:black;
 }
 
 #inner-left {
@@ -78,4 +79,10 @@ span:nth-of-type(3n+1) {
 
 span:nth-of-type(3n+2) {
     background:cyan;
+}
+
+button {
+    background: black;
+    border: none;
+    width:100%;
 }

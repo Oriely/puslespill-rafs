@@ -35,6 +35,8 @@ function generategrid() {
     createElemWithAttr("inner-left", 'div', 'id', "puzzle-left");
 
     createElemWithAttr("inner-right", 'div', 'id', "puzzle-right");
+    
+    createElemWithAttr('wrapper', 'button', 'id', 'knappers');
 
 }
 generategrid();
@@ -62,7 +64,16 @@ function generatePuzzlePieces() {
     for (i = 0; i <= _numOfPieces; i++) {
         _rightSide.innerHTML += piecesImg[i];
     }
+
 }
+let knappers = document.getElementById('knappers');
+
+knappers.addEventListener('onclick', function(){
+    document.getElementById('puzzle-left').innerHTML = '';
+    for (i = 0; i <= _numOfPieces; i++) {
+        document.getElementById('puzzle-left').innerHTML += piecesImg[i];
+    }
+});
 
 //Drag + drop secion
 function allowDrop(ev) {
