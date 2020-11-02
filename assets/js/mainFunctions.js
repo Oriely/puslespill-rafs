@@ -41,13 +41,13 @@ function genTemplate()  {
     genElem('inner-top', 'div', 'id', 'container');
     genElem('inner-bottom', 'div', 'id', 'puzzle-pieces');
     genElem('container', 'img', 'id', 'panda');
-    attr('panda', 'src', '/assets/images/panda.png');
+    attr('panda', 'src', 'assets/images/panda.png');
     attr('panda', 'width', '300px');
     attr('panda', 'draggable', 'false');
     genElem('container', 'div', 'id', 'puzzle-box');
     genElem('puzzle-box', 'div', 'id', 'puzzle-box-inner');
     genElem('container', 'img', 'id', 'pandaB');
-    attr('pandaB', 'src', '/assets/images/panda.png');
+    attr('pandaB', 'src', 'assets/images/panda.png');
     attr('pandaB', 'width', '300px');
     attr('pandaB', 'draggable', 'false');
     attr('pandaB', 'onclick', 'finishPuzzle()');
